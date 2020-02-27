@@ -1,5 +1,5 @@
-* @ValidationCode : MjoxNjY4ODY4OTE3OkNwMTI1MjoxNTgyNzgwNDU2NDM4OnVzZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMTlfQU1SLjA6LTE6LTE=
-* @ValidationInfo : Timestamp         : 27 Feb 2020 12:14:16
+* @ValidationCode : MjoxOTQ2NTYzMzEzOkNwMTI1MjoxNTgyNzgxNDI4NjgwOnVzZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMTlfQU1SLjA6LTE6LTE=
+* @ValidationInfo : Timestamp         : 27 Feb 2020 12:30:28
 * @ValidationInfo : Encoding          : Cp1252
 * @ValidationInfo : User Name         : user
 * @ValidationInfo : Nb tests success  : N/A
@@ -35,7 +35,7 @@ RETURN
 *-----------------------------------------------------------------------------
 INIT:
 *-----------------------------------------------------------------------------
-    Y.TEST = "HELLO WORLD JUAN"
+    Y.TEST = "HELLO WORLD JUAN FELIX"
 
 RETURN
 
