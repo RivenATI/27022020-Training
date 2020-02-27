@@ -1,5 +1,5 @@
-* @ValidationCode : MjoxOTQ2NTYzMzEzOkNwMTI1MjoxNTgyNzgxNDI4NjgwOnVzZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMTlfQU1SLjA6LTE6LTE=
-* @ValidationInfo : Timestamp         : 27 Feb 2020 12:30:28
+* @ValidationCode : MjotMTU4NTkyNDYwOkNwMTI1MjoxNTgyNzgyMTUxNDg2OnVzZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMTlfQU1SLjA6LTE6LTE=
+* @ValidationInfo : Timestamp         : 27 Feb 2020 12:42:31
 * @ValidationInfo : Encoding          : Cp1252
 * @ValidationInfo : User Name         : user
 * @ValidationInfo : Nb tests success  : N/A
@@ -24,6 +24,7 @@ SUBROUTINE Test
     $INSERT I_COMMON
     $INSERT I_EQUATE
 * ternyata ada perubahan ADA AJADA
+* makanmakan
 *-----------------------------------------------------------------------------
 MAIN:
 *-----------------------------------------------------------------------------
