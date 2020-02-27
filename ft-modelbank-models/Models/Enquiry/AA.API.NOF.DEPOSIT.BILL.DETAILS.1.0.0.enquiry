@@ -1,0 +1,173 @@
+Enquiry "AA.API.NOF.DEPOSIT.BILL.DETAILS.1.0.0" for "name:/AA_ModelBank:NOFILE.AA.BILL.DETAILS#" {
+    metamodelVersion: "1.30.6" full-description {
+        en = "getDepositBillDetails"
+    }
+
+    start-line: 4
+    end-line: 20 fixed-selection "FILE.VER" {
+        Equals "SIM"
+    }
+
+    custom-selection {
+
+        field "ARR.ID" {
+            label {
+                en = "arrangementId"
+            }
+
+        }
+
+        AND
+
+        field "SIM.REF" {
+            label {
+                en = "simulationReference"
+            }
+
+        }
+
+        None
+    }
+
+    field "ID" {
+        label {
+            en = "billId"
+        }
+
+        comments: "key"
+        length: 30
+        alignment: Left
+        comma-separator: false
+        position {
+            column: 1
+        }
+
+        processing-mode: Single
+        operation: application-field-name "ID"
+        conversion: extract from 1 to 1 delimited by "*"
+    }
+
+    field "SIM.REF" {
+        length: 40
+        alignment: Right
+        comma-separator: false
+        processing-mode: Single
+        operation: selection "SIM.REF"
+    }
+
+    field "SIM.DATE" {
+        comma-separator: false
+        operation: selection "SIM.REF"
+        conversion: getFrom "AA.SIMULATION.RUNNER" "SIM.END.DATE" false
+    }
+
+    field "REDEM.PROPERTY" {
+        comma-separator: false
+        operation: calc "ID":"\"*\"":"SIM.REF":"\"*\"":"SIM.DATE"
+        conversion: call
+        jBC: "@ E.MB.AA.GET.REDEEM.PROPERTY.AMOUNTS"
+    }
+
+    field "DELIMIT.MV" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: field-extract "REDEM.PROPERTY"
+        conversion: call
+        jBC: "@ E.MB.AA.GET.REDEEM.PROP.FMT"
+    }
+
+    field "PROPERTY" {
+        length: 15
+        alignment: Left
+        comma-separator: false
+        processing-mode: Multi
+        operation: field-extract "DELIMIT.MV"
+        conversion: extract from 1 to 1 delimited by "*"
+    }
+
+    field "INDICATOR" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: field-extract "DELIMIT.MV"
+        conversion: extract from 2 to 1 delimited by "*"
+    }
+
+    field "AMOUNT" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: field-extract "DELIMIT.MV"
+        conversion: extract from 3 to 1 delimited by "*"
+    }
+
+    field "PROP.DESC" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: field-extract "PROPERTY"
+        conversion: getFrom "AA.PROPERTY" "DESCRIPTION" false
+    }
+
+    field "PROPERTY.TAX" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: constant "\"Tax\""
+    }
+
+    field "PROPERTY.DESCRIPTION" {
+        label {
+            en = "propertyName"
+        }
+
+        comments: "properties"
+        comma-separator: false
+        position {
+            column: 2
+        }
+
+        processing-mode: Multi
+        operation: if "PROPERTY" Matches "\"...TAX...\"" process "PROPERTY.TAX" "PROP.DESC"
+    }
+
+    field "NEG" {
+        comma-separator: false
+        processing-mode: Single
+        operation: constant "\"-1\""
+    }
+
+    field "NEG.AMOUNT" {
+        comma-separator: false
+        processing-mode: Multi
+        operation: calc "NEG" * "AMOUNT"
+    }
+
+    field "PROPERTY.AMOUNT" {
+        label {
+            en = "nextPaymentAmount"
+        }
+
+        comments: "properties"
+        display-type: "AMOUNT"
+        comma-separator: false
+        position {
+            column: 3
+        }
+
+        processing-mode: Multi
+        operation: if "INDICATOR" Equals "DEBIT" process "NEG.AMOUNT" "AMOUNT"
+    }
+
+    field "TOTAL.AMOUNT" {
+        label {
+            en = "totalAmount"
+        }
+
+        display-type: "AMOUNT"
+        comma-separator: false
+        position {
+            column: 4
+        }
+
+        processing-mode: Single
+        operation: total "PROPERTY.AMOUNT"
+    }
+
+}

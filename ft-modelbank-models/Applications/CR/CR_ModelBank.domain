@@ -1,0 +1,603 @@
+# UTF-8
+/* Model Configuration For ARC CRM */
+Domain CR_ModelBank
+    @t24:i (module=CR)
+    @java:Package (value=com.temenos.t24.datamodel.cr.cr_modelbank)
+namespace "http://www.temenos.com/t24/CR_ModelBank"
+metamodelVersion 1.30.6
+Classes {
+    CR_CAMPAIGN_STATISTICS
+        @i18n:Description (en="")
+        @t24:i (t24Name=CR.CAMPAIGN.STATISTICS, level=I, type=L, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BANK_CAMPAIGN_START_END -> CR_ModelBank:CR_CAMPAIGN_STATISTICS PK required
+            @t24:i (align=L, inputBehaviour=I, maxLength=75, sysNumber=0.0, core=true, businessType=A, t24Name=BANK.CAMPAIGN.START.END, mask="R###########################################################################", mandatory=true)
+        /* This field stores ID of the master company. */
+        BANK_ID -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=1.0, core=true, businessType=COM, t24Name=BANK.ID, mandatory=false)
+        /* This field stores  the campaign generator ID. It can be STFD.CAMPAIGN for Short Term Deposit or ARCIB.ACCESS.CAMPAIGN for ARC IB access. */
+        CAMPAIGN_ID -> CR_Operational:CR_CAMPAIGN_GENERATOR
+            @i18n:Label (en="Campaign Id")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=2.0, core=true, businessType=A, t24Name=CAMPAIGN.ID, mandatory=false)
+        CHANNEL -> byValue CR_ModelBank:CR_CAMPAIGN_STATISTICS__CHANNEL *
+            @t24:i (t24Name=CHANNEL)
+        COMPANY -> byValue CR_ModelBank:CR_CAMPAIGN_STATISTICS__COMPANY *
+            @t24:i (t24Name=COMPANY)
+        /* This field specifies end date of the campaign. */
+        END_DATE : T24BusinessTypes:D
+            @i18n:Label (en="End Date")
+            @i18n:Tooltip (en="End Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=4.0, core=true, t24Name=END.DATE, mandatory=false)
+        LAST_UPDATED_ON : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=16.0, core=true, t24Name=LAST.UPDATED.ON, mandatory=false)
+        /* This field stores the period of the campaign based on  Start Date and the End Date. */
+        LENGTH_IN_DAYS : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=5, sysNumber=5.0, core=true, t24Name=LENGTH.IN.DAYS, mandatory=false)
+        RESERVED_1 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=26.0, core=true, t24Name=RESERVED.1, mandatory=false)
+        RESERVED_10 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=17.0, core=true, t24Name=RESERVED.10, mandatory=false)
+        RESERVED_2 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=25.0, core=true, t24Name=RESERVED.2, mandatory=false)
+        RESERVED_3 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=RESERVED.3, mandatory=false)
+        RESERVED_4 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=23.0, core=true, t24Name=RESERVED.4, mandatory=false)
+        RESERVED_5 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=22.0, core=true, t24Name=RESERVED.5, mandatory=false)
+        RESERVED_6 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=21.0, core=true, t24Name=RESERVED.6, mandatory=false)
+        RESERVED_7 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=20.0, core=true, t24Name=RESERVED.7, mandatory=false)
+        RESERVED_8 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=19.0, core=true, t24Name=RESERVED.8, mandatory=false)
+        RESERVED_9 : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=18.0, core=true, t24Name=RESERVED.9, mandatory=false)
+        /* This field specifies start date of the campaign. */
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=3.0, core=true, t24Name=START.DATE, mandatory=false)
+        /* This specifies the total opportunities created for the bank/ Master company under different branch companies. */
+        TOTAL_BANK_OPP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=15.0, core=true, t24Name=TOTAL.BANK.OPP, mandatory=false)
+    }
+    CR_CAMPAIGN_STATISTICS__CHANNEL
+    {
+        /* This field stores the channels through which the campaign was run. It is a multi-value set. */
+        CHANNEL -> EB_ARC:EB_CHANNEL
+            @i18n:Label (en=Channel)
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=11.0, core=true, businessType=A, t24Name=CHANNEL, mandatory=false)
+        CH_STATUS -> byValue CR_ModelBank:CR_CAMPAIGN_STATISTICS__CHANNEL__CH_STATUS *
+            @t24:i (t24Name=CH.STATUS)
+        /* This field specifies  the count of opportunities created through channel. This  is a multi-value set. */
+        CH_TOTAL_OPP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=14.0, core=true, t24Name=CH.TOTAL.OPP, mandatory=false)
+    }
+    CR_CAMPAIGN_STATISTICS__CHANNEL__CH_STATUS
+    {
+        /* This field specifies the count of opportunities created through channel for a particular status. It is a multi-value set. */
+        CH_OPP_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=CH.OPP.COUNT, mandatory=false)
+        /* This field stores the opportunity with the status specified in CR.OPPORTUNITY.STATUS. It is a multi-value sub set. */
+        CH_STATUS -> CR_Operational:CR_OPPORTUNITY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=12.0, core=true, businessType=A, t24Name=CH.STATUS, mandatory=false)
+    }
+    CR_CAMPAIGN_STATISTICS__COMPANY
+    {
+/* This field  stores the ID of the Branch Company.
+It is a multi-value set. */
+        COMPANY -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=6.0, core=true, businessType=A, t24Name=COMPANY, mandatory=false)
+        /* This specifies the total opportunity count created for the company. It is a multi-value set. */
+        COMP_TOTAL_OPP : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=10.0, core=true, t24Name=COMP.TOTAL.OPP, mandatory=false)
+        /* This stores the ID of the Lead Company. It is a multi-value sub set. */
+        LEAD_COMPANY -> ST_CompanyCreation:COMPANY
+            @t24:i (align=L, inputBehaviour=I, maxLength=11, sysNumber=9.0, core=true, businessType=COM, t24Name=LEAD.COMPANY, mandatory=false)
+        STATUS -> byValue CR_ModelBank:CR_CAMPAIGN_STATISTICS__COMPANY__STATUS *
+            @t24:i (t24Name=STATUS)
+    }
+    CR_CAMPAIGN_STATISTICS__COMPANY__STATUS
+    {
+/* This specifies the total opportunity count for status.
+It is a multi-value sub set. */
+        OPP_COUNT : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=8.0, core=true, t24Name=OPP.COUNT, mandatory=false)
+        /* This field stores the opportunity with the status specified in CR.OPPORTUNITY.STATUS.   It is a multi-value sub set. */
+        STATUS -> CR_Operational:CR_OPPORTUNITY_STATUS
+            @i18n:Label (en=Status)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=7.0, core=true, businessType=A, t24Name=STATUS, mandatory=false)
+    }
+    CR_IDENTIFY_CUSTOMER
+        @i18n:Description (en="")
+        @t24:i (t24Name=CR.IDENTIFY.CUSTOMER, level=C, type=D, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=true)
+    {
+        ADDRESS_PROOF_REF : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=5.0, core=true, t24Name=ADDRESS.PROOF.REF, mandatory=false)
+        ADDRESS_PROOF_TYPE : CR_ModelBank:CR_IDENTIFY_CUSTOMER__ADDRESS_PROOF_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=4.0, core=true, t24Name=ADDRESS.PROOF.TYPE, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=21.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=22.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=18.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=19.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=15.0, core=true, t24Name=CURR.NO, mandatory=false)
+        DATE_TIME -> byValue CR_ModelBank:CR_IDENTIFY_CUSTOMER__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> CR_ModelBank:CR_IDENTIFY_CUSTOMER PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=DEAL.NO, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=20.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        ID_DOC_REFERENCE : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=3.0, core=true, t24Name=ID.DOC.REFERENCE, mandatory=false)
+        ID_DOC_TYPE : CR_ModelBank:CR_IDENTIFY_CUSTOMER__ID_DOC_TYPE
+            @t24:i (align=L, inputBehaviour=I, maxLength=15, sysNumber=2.0, core=true, t24Name=ID.DOC.TYPE, mandatory=false)
+        ID_NAME : T24BusinessTypes:A required
+            @i18n:Label (en=Name)
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=1.0, core=true, t24Name=ID.NAME, mandatory=true)
+        INPUTTER -> byValue CR_ModelBank:CR_IDENTIFY_CUSTOMER__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue CR_ModelBank:CR_IDENTIFY_CUSTOMER__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=14.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=11.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=9.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=8.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=RESERVED5, mandatory=false)
+        SUFFICIENT_DATA : CR_ModelBank:CR_IDENTIFY_CUSTOMER__SUFFICIENT_DATA
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, t24Name=SUFFICIENT.DATA, mandatory=false)
+    }
+    CR_IDENTIFY_CUSTOMER__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=17.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CR_IDENTIFY_CUSTOMER__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=16.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CR_IDENTIFY_CUSTOMER__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=13.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    CR_PORTFOLIO
+        @i18n:Description (en="")
+        @t24:i (t24Name=CR.PORTFOLIO, level=I, type=D, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=19.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=20.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=16.0, core=true, t24Name=AUTHORISER, mandatory=false)
+/* Captures the option if Charge conditions needs to be setup.
+Validation Rules
+Allowed values are None, No or Yes. 
+ Optional input. By default it is None. */
+        CHARGE_CONDITIONS : CR_ModelBank:CR_PORTFOLIO__CHARGE_CONDITIONS
+            @i18n:Label (en="Charge conditions")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=2.0, core=true, t24Name=CHARGE.CONDITIONS, mandatory=false)
+/* Captures the option if Corporate actions needs to be setup for the portfolio.
+Validation Rules
+Allowed values are None, No or Yes.
+ Optional input. By default it is None. */
+        CORP_ACTIONS : CR_ModelBank:CR_PORTFOLIO__CORP_ACTIONS
+            @i18n:Label (en="Corporate Actions")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=5.0, core=true, t24Name=CORP.ACTIONS, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=17.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=13.0, core=true, t24Name=CURR.NO, mandatory=false)
+/* Denotes the CUSTOMER for whom the portfolio preferences are being captured.
+Validation Rules
+1-8 numeric character Customer Code. */
+        CUSTOMER -> ST_Customer:CUSTOMER required
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=8, sysNumber=1.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=true)
+        DATE_TIME -> byValue CR_ModelBank:CR_PORTFOLIO__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> CR_ModelBank:CR_PORTFOLIO PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=DEAL.NO, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=18.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+/* Captures the option if Holding restrictions needs to be applied to the portfolio.
+Validation Rules
+Allowed values are None, No or Yes.
+ Optional input. By default it is None. */
+        HOLD_RESTR : CR_ModelBank:CR_PORTFOLIO__HOLD_RESTR
+            @i18n:Label (en="Holding Restrictions")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=4.0, core=true, t24Name=HOLD.RESTR, mandatory=false)
+        INPUTTER -> byValue CR_ModelBank:CR_PORTFOLIO__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue CR_ModelBank:CR_PORTFOLIO__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=12.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        RESERVED1 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=10.0, core=true, t24Name=RESERVED1, mandatory=false)
+        RESERVED2 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=9.0, core=true, t24Name=RESERVED2, mandatory=false)
+        RESERVED3 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=8.0, core=true, t24Name=RESERVED3, mandatory=false)
+        RESERVED4 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, t24Name=RESERVED4, mandatory=false)
+        RESERVED5 : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=6.0, core=true, t24Name=RESERVED5, mandatory=false)
+/* Captures the option if Trading restrictions needs to be applied to the portfolio.
+Validation Rules
+Allowed values are None, No or Yes.
+ Optional input. By default it is None. */
+        TRADING_RESTR : CR_ModelBank:CR_PORTFOLIO__TRADING_RESTR
+            @i18n:Label (en="Trading Restrictions")
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=3.0, core=true, t24Name=TRADING.RESTR, mandatory=false)
+    }
+    CR_PORTFOLIO__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=15.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    CR_PORTFOLIO__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=14.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    CR_PORTFOLIO__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=11.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    NOFILE_CAMPAIGN_BY_BANK
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.CAMPAIGN.BY.BANK, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BANK : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=BANK, mandatory=false)
+        CAMPAIGN_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=13, core=false, t24Name=CAMPAIGN.DATA, genOperation=E.CAMP.ANALYSIS, mandatory=true)
+        CAMPAIGN_ID -> CR_Operational:CR_CAMPAIGN_GENERATOR
+            @i18n:Label (en="Campaign Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=CAMPAIGN.ID, mandatory=false)
+        EN_DATE : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=EN.DATE, mandatory=false)
+        ST_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Start Date")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=ST.DATE, mandatory=false)
+    }
+    NOFILE_CAMPAIGN_BY_CHANNEL
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.CAMPAIGN.BY.CHANNEL, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BANK : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=BANK, mandatory=false)
+        CAMPAIGN_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=13, core=false, t24Name=CAMPAIGN.DATA, genOperation=E.CAMP.CHANNEL.ANALYSIS, mandatory=true)
+        CAMPAIGN_ID -> CR_Operational:CR_CAMPAIGN_GENERATOR
+            @i18n:Label (en="Campaign Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=CAMPAIGN.ID, mandatory=false)
+    }
+    NOFILE_E_CR_REAL_TIME_OPP
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.E.CR.REAL.TIME.OPP, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        BANK -> ST_CompanyCreation:COMPANY
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=BANK, mandatory=false)
+        BANK_USER -> EB_Security:USER
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=BANK.USER, mandatory=false)
+        OPPORTUNITY -> CR_Operational:CR_OPPORTUNITY_DEFINITION
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=OPPORTUNITY, mandatory=true)
+        OPP_DATA : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=25, core=false, t24Name=OPP.DATA, genOperation=E.CR.REAL.TIME.OPP, mandatory=false)
+    }
+    NOFILE_OPPORTUNITY_BRANCH
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.OPPORTUNITY.BRANCH, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CAMPAIGN_ID -> CR_Operational:CR_CAMPAIGN_GENERATOR
+            @i18n:Label (en="Campaign Id")
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=CAMPAIGN.ID, mandatory=false)
+        CAMP_END_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Campaign End Date")
+            @i18n:Tooltip (en="Indicates the End date for Campaign")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=CAMP.END.DATE, mandatory=false)
+        CAMP_START_DATE : T24BusinessTypes:N
+            @i18n:Label (en="Campaign Start Date")
+            @i18n:Tooltip (en="Indicates the Start date for Campaign")
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, core=false, t24Name=CAMP.START.DATE, mandatory=false)
+        LEAD_COMPANY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, core=false, t24Name=LEAD.COMPANY, mandatory=false)
+        MASTER_COMPANY : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=25, core=false, t24Name=MASTER.COMPANY, mandatory=false)
+        OPPORTUNITY_DATA : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=13, core=false, t24Name=OPPORTUNITY.DATA, genOperation=CR.OPP.DATA.BY.BRANCH, mandatory=true)
+    }
+    NOFILE_STMT_ENT_DETS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.STMT.ENT.DETS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AMOUNT_FCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Fcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.FCY, mandatory=false)
+        AMOUNT_LCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Lcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.LCY, mandatory=false)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=CURRENCY, mandatory=false)
+        SEL_REC : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=SEL.REC, genOperation=E.NOF.TODAY.HIVAL.ENTRIES, mandatory=true)
+    }
+    NOFILE_STMT_ENT_DETS_RM
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.STMT.ENT.DETS.RM, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ACCOUNT_OFFICER : T24BusinessTypes:N
+            @i18n:Label (en="Account Officer")
+            @i18n:Tooltip (en="Indicates Account Officer responsible")
+            @t24:i (align=R, inputBehaviour=N, maxLength=10, core=false, t24Name=ACCOUNT.OFFICER, mandatory=false)
+        AMOUNT_FCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Fcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.FCY, mandatory=false)
+        AMOUNT_LCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Lcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.LCY, mandatory=false)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=CURRENCY, mandatory=false)
+        SEL_REC : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=SEL.REC, genOperation=E.NOF.TODAY.HIVAL.ENTRIES.RM, mandatory=true)
+    }
+    NOFILE_STMT_ENT_SECT
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.STMT.ENT.SECT, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        AMOUNT_FCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Fcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.FCY, mandatory=false)
+        AMOUNT_LCY : T24BusinessTypes:N
+            @i18n:Label (en="Amount Lcy")
+            @t24:i (align=R, inputBehaviour=N, maxLength=19, core=false, t24Name=AMOUNT.LCY, mandatory=false)
+        CURRENCY : T24BusinessTypes:N
+            @i18n:Label (en=Ccy)
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, core=false, t24Name=CURRENCY, mandatory=false)
+        SEL_REC : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, core=false, t24Name=SEL.REC, genOperation=E.NOF.TODAY.HIVAL.ENT.SECT, mandatory=true)
+    }
+    NOFILE_TCIB_OPPORTUNITIES
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.TCIB.OPPORTUNITIES, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=N, maxLength=15, core=false, t24Name=CUSTOMER, mandatory=false)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name="@ID", genOperation=E.NOFILE.TCIB.OPPR, mandatory=true)
+        LANGUAGE : T24BusinessTypes:N
+            @i18n:Label (en=Language)
+            @i18n:Tooltip (en="Indicates the Language used")
+            @t24:i (align=R, inputBehaviour=N, maxLength=2, core=false, t24Name=LANGUAGE, mandatory=false)
+    }
+    PW_AF_ACCOUNT
+        @i18n:Description (en="")
+        @t24:i (t24Name=PW.AF.ACCOUNT, level=C, type=D, allowedFunctions="A C D E H I L P Q R S", localRefAllowed=false)
+    {
+        AA_ACTIVITY -> AA_ProductFramework:AA_ACTIVITY
+            @t24:i (align=L, inputBehaviour=I, maxLength=55, sysNumber=22.0, core=true, businessType=A, t24Name=AA.ACTIVITY, mandatory=false)
+        AA_ARRANGEMENT : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=20.0, core=true, t24Name=AA.ARRANGEMENT, mandatory=false)
+        AA_PRODUCT -> AA_ProductManagement:AA_PRODUCT
+            @t24:i (align=L, inputBehaviour=I, maxLength=30, sysNumber=21.0, core=true, businessType=A, t24Name=AA.PRODUCT, mandatory=false)
+        ACCOUNT_NUMBER : T24BusinessTypes:ANT
+            @i18n:Label (en="Account Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=14, sysNumber=1.0, core=true, t24Name=ACCOUNT.NUMBER, mandatory=false)
+        ACCOUNT_OFFICER -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Account Officer")
+            @i18n:Tooltip (en="Indicates Account Officer responsible")
+            @t24:i (align=L, inputBehaviour=I, maxLength=20, sysNumber=7.0, core=true, businessType=A, t24Name=ACCOUNT.OFFICER, mandatory=false)
+        ACCOUNT_TITLE_1 : T24BusinessTypes:A
+            @i18n:Label (en=Name)
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=4.0, core=true, t24Name=ACCOUNT.TITLE.1, mandatory=false)
+        AMOUNT : T24BusinessTypes:AMT
+            @i18n:Label (en=Amount)
+            @i18n:Tooltip (en="Indicates the Amount")
+            @t24:i (align=R, inputBehaviour=I, maxLength=19, sysNumber=19.0, core=true, t24Name=AMOUNT, typeModifiers="-USD", mandatory=false)
+        APPLY_NOTES -> byValue CR_ModelBank:PW_AF_ACCOUNT__APPLY_NOTES *
+            @t24:i (t24Name=APPLY.NOTES)
+        APPLY_STATUS : CR_ModelBank:PW_AF_ACCOUNT__APPLY_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=11.0, core=true, t24Name=APPLY.STATUS, mandatory=false)
+        APPROVE_NOTES -> byValue CR_ModelBank:PW_AF_ACCOUNT__APPROVE_NOTES *
+            @t24:i (t24Name=APPROVE.NOTES)
+        APPROVE_STATUS : CR_ModelBank:PW_AF_ACCOUNT__APPROVE_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=15.0, core=true, t24Name=APPROVE.STATUS, mandatory=false)
+        AUDITOR_CODE : T24BusinessTypes:A
+            @i18n:Label (en="Auditor Code")
+            @i18n:Tooltip (en="Auditor Code")
+            @t24:i (align=L, inputBehaviour=E, maxLength=16, sysNumber=32.0, core=true, t24Name=AUDITOR.CODE, mandatory=false)
+        AUDIT_DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Audit Date Time")
+            @i18n:Tooltip (en="Date and time when record was audited")
+            @t24:i (align=L, inputBehaviour=E, maxLength=15, sysNumber=33.0, core=true, t24Name=AUDIT.DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+        AUTHORISER : T24BusinessTypes:A
+            @i18n:Label (en=Authoriser)
+            @i18n:Tooltip (en="Indicates the User who Authorises the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=29.0, core=true, t24Name=AUTHORISER, mandatory=false)
+        BLANK : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=N, maxLength=1, sysNumber=18.0, core=true, t24Name=BLANK, mandatory=false)
+        CATEGORY -> ST_Config:CATEGORY
+            @i18n:Label (en=Category)
+            @i18n:Tooltip (en="Specifies the Category")
+            @t24:i (align=L, inputBehaviour=I, maxLength=6, sysNumber=3.0, core=true, businessType=A, t24Name=CATEGORY, mandatory=false)
+        COMPLETE_DATE : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=17.0, core=true, t24Name=COMPLETE.DATE, mandatory=false)
+        CO_CODE -> ST_CompanyCreation:COMPANY
+            @i18n:Label (en=Company)
+            @t24:i (align=L, inputBehaviour=N, maxLength=11, sysNumber=30.0, core=true, businessType=A, t24Name=CO.CODE, mask="R##-###-####", mandatory=false)
+        CR_OPPOR_DESC : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=9.0, core=true, t24Name=CR.OPPOR.DESC, mandatory=false)
+        CR_OPPOR_ID : T24BusinessTypes:A
+            @i18n:Label (en="Opportunity ID")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=8.0, core=true, t24Name=CR.OPPOR.ID, mandatory=false)
+        CR_SOURCE_ID : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=10.0, core=true, t24Name=CR.SOURCE.ID, mandatory=false)
+        CURRENCY -> ST_CurrencyConfig:CURRENCY
+            @i18n:Label (en=Ccy)
+            @t24:i (align=L, inputBehaviour=I, maxLength=3, sysNumber=6.0, core=true, businessType=CCY, t24Name=CURRENCY, mandatory=false)
+        CURR_NO : T24BusinessTypes:N
+            @i18n:Label (en="Curr No")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=26.0, core=true, t24Name=CURR.NO, mandatory=false)
+        CUSTOMER -> ST_Customer:CUSTOMER
+            @i18n:Label (en=Customer)
+            @i18n:Tooltip (en="Customer Liability")
+            @t24:i (align=R, inputBehaviour=I, maxLength=10, sysNumber=2.0, core=true, businessType=CUS, t24Name=CUSTOMER, mandatory=false)
+        DATE_TIME -> byValue CR_ModelBank:PW_AF_ACCOUNT__DATE_TIME *
+            @t24:i (t24Name=DATE.TIME)
+        DEAL_NO -> CR_ModelBank:PW_AF_ACCOUNT PK required
+            @i18n:Label (en="Deal Number")
+            @t24:i (align=L, inputBehaviour=I, maxLength=50, sysNumber=0.0, core=true, businessType=A, t24Name=DEAL.NO, mandatory=true)
+        DEPT_CODE -> ST_Config:DEPT_ACCT_OFFICER
+            @i18n:Label (en="Dept Code")
+            @t24:i (align=R, inputBehaviour=N, maxLength=4, sysNumber=31.0, core=true, t24Name=DEPT.CODE, mandatory=false)
+        INPUTTER -> byValue CR_ModelBank:PW_AF_ACCOUNT__INPUTTER *
+            @t24:i (t24Name=INPUTTER)
+        OVERRIDE -> byValue CR_ModelBank:PW_AF_ACCOUNT__OVERRIDE *
+            @t24:i (t24Name=OVERRIDE)
+        RECORD_STATUS : T24BusinessTypes:STAT
+            @i18n:Label (en="Record Status")
+            @t24:i (align=L, inputBehaviour=N, maxLength=4, sysNumber=25.0, core=true, t24Name=RECORD.STATUS, mandatory=false)
+        REVIEW_NOTES -> byValue CR_ModelBank:PW_AF_ACCOUNT__REVIEW_NOTES *
+            @t24:i (t24Name=REVIEW.NOTES)
+        REVIEW_STATUS : CR_ModelBank:PW_AF_ACCOUNT__REVIEW_STATUS
+            @t24:i (align=L, inputBehaviour=I, maxLength=10, sysNumber=13.0, core=true, t24Name=REVIEW.STATUS, mandatory=false)
+        SHORT_TITLE : T24BusinessTypes:A
+            @i18n:Label (en="Account Name")
+            @i18n:Tooltip (en="Indicates the abbreviated title of the account")
+            @t24:i (align=L, inputBehaviour=I, maxLength=35, sysNumber=5.0, core=true, t24Name=SHORT.TITLE, mandatory=false)
+        START_DATE : T24BusinessTypes:D
+            @i18n:Label (en="Start Date")
+            @i18n:Tooltip (en="Start Date")
+            @t24:i (align=R, inputBehaviour=I, maxLength=11, sysNumber=23.0, core=true, t24Name=START.DATE, mandatory=false)
+    }
+    PW_AF_ACCOUNT__APPLY_NOTES
+    {
+        APPLY_NOTES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=12.0, core=true, t24Name=APPLY.NOTES, isTextarea=true, mandatory=false)
+    }
+    PW_AF_ACCOUNT__APPROVE_NOTES
+    {
+        APPROVE_NOTES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=16.0, core=true, t24Name=APPROVE.NOTES, isTextarea=true, mandatory=false)
+    }
+    PW_AF_ACCOUNT__DATE_TIME
+    {
+        DATE_TIME : T24BusinessTypes:RELTIME
+            @i18n:Label (en="Date time")
+            @i18n:Tooltip (en="Date and time when record was input or authorised")
+            @t24:i (align=L, inputBehaviour=N, maxLength=15, sysNumber=28.0, core=true, t24Name=DATE.TIME, mask="RDD DD  DD ##:##", mandatory=false)
+    }
+    PW_AF_ACCOUNT__INPUTTER
+    {
+        INPUTTER : T24BusinessTypes:A
+            @i18n:Label (en=Inputter)
+            @i18n:Tooltip (en="The user who last updated the record")
+            @t24:i (align=L, inputBehaviour=N, maxLength=40, sysNumber=27.0, core=true, t24Name=INPUTTER, mandatory=false)
+    }
+    PW_AF_ACCOUNT__OVERRIDE
+    {
+        OVERRIDE : T24BusinessTypes:A
+            @i18n:Label (en=Override)
+            @i18n:Tooltip (en="Overrides generated by this transaction")
+            @t24:i (align=L, inputBehaviour=N, maxLength=35, sysNumber=24.0, core=true, t24Name=OVERRIDE, mandatory=false)
+    }
+    PW_AF_ACCOUNT__REVIEW_NOTES
+    {
+        REVIEW_NOTES : T24BusinessTypes:A
+            @t24:i (align=L, inputBehaviour=I, maxLength=65, sysNumber=14.0, core=true, t24Name=REVIEW.NOTES, isTextarea=true, mandatory=false)
+    }
+}
+Enumerations {
+    CR_IDENTIFY_CUSTOMER__ADDRESS_PROOF_TYPE : mml:string
+        OFFICIAL_LETTER=OFFICIAL.LETTER
+        REFERENCE=REFERENCE
+        UTILITY_BILL=UTILITY.BILL
+    CR_IDENTIFY_CUSTOMER__ID_DOC_TYPE : mml:string
+        DRIVERS_LICENCE=DRIVERS.LICENCE
+        ID_CARD=ID.CARD
+        PASSPORT=PASSPORT
+        SECURITY_PASS=SECURITY.PASS
+    CR_IDENTIFY_CUSTOMER__SUFFICIENT_DATA : mml:string
+        NO=NO
+        YES=YES
+    CR_PORTFOLIO__CHARGE_CONDITIONS : mml:string
+        NO=NO
+        YES=YES
+    CR_PORTFOLIO__CORP_ACTIONS : mml:string
+        NO=NO
+        YES=YES
+    CR_PORTFOLIO__HOLD_RESTR : mml:string
+        NO=NO
+        YES=YES
+    CR_PORTFOLIO__TRADING_RESTR : mml:string
+        NO=NO
+        YES=YES
+    PW_AF_ACCOUNT__APPLY_STATUS : mml:string
+        APPLY=APPLY
+        SAVE=SAVE
+    PW_AF_ACCOUNT__APPROVE_STATUS : mml:string
+        APPROVED=APPROVED
+        DECLINED=DECLINED
+    PW_AF_ACCOUNT__REVIEW_STATUS : mml:string
+        APPROVED=APPROVED
+        DECLINED=DECLINED
+}

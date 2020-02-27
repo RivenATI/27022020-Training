@@ -1,0 +1,510 @@
+Enquiry "AA.API.NOF.LOAN.ARRANGEMENT.DETAILS.1.0.0" for "name:/AA_Channels:NOFILE.TC.AA.LOAN.OVERVIEW#" {
+    metamodelVersion: "1.30.6" full-description {
+        en = "getLoanDetails"
+    }
+
+    start-line: 4
+    end-line: 19 fixed-selection "LOAN.DETAILS" {
+    }
+
+    custom-selection {
+
+        field "ARRANGEMENT.ID" {
+            label {
+                en = "arrangementId"
+            }
+
+        }
+
+        AND
+
+        field "DATE.FROM" {
+            label {
+                en = "dateFrom"
+            }
+
+        }
+
+        AND
+
+        field "DATE.TO" {
+            label {
+                en = "dateTo"
+            }
+
+        }
+
+        AND
+
+        field "BALANCE.TYPE" {
+            label {
+                en = "balanceTypes"
+            }
+
+        }
+
+        None
+    }
+
+    field "ARRANGEMENT" {
+        label {
+            en = "arrangementId"
+        }
+
+        comments: "key"
+        comma-separator: false
+        position {
+            column: 1
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 1 to 1 delimited by "*"
+    }
+
+    field "CURRENCY" {
+        label {
+            en = "currencyId"
+        }
+
+        comma-separator: false
+        position {
+            column: 2
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 2 to 1 delimited by "*"
+    }
+
+    field "START.DATE" {
+        label {
+            en = "startDate"
+        }
+
+        display-type: "DATE"
+        comma-separator: false
+        position {
+            column: 3
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 3 to 1 delimited by "*"
+    }
+
+    field "MATURITY.DATE" {
+        label {
+            en = "maturityDate"
+        }
+
+        display-type: "DATE"
+        comma-separator: false
+        position {
+            column: 4
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 4 to 1 delimited by "*"
+    }
+
+    field "MATURES.IN" {
+        label {
+            en = "maturesIn"
+        }
+
+        comma-separator: false
+        position {
+            column: 5
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 5 to 1 delimited by "*"
+    }
+
+    field "COOLING.DATE" {
+        label {
+            en = "coolingOffDate"
+        }
+
+        display-type: "DATE"
+        comma-separator: false
+        position {
+            column: 6
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 6 to 1 delimited by "*"
+    }
+
+    field "NEXT.PAY.AMOUNT" {
+        label {
+            en = "nextPaymentAmount"
+        }
+
+        display-type: "AMOUNT"
+        comma-separator: false
+        position {
+            column: 7
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 7 to 1 delimited by "*"
+    }
+
+    field "NEXT.PAY.DATE" {
+        label {
+            en = "nextPaymentDate"
+        }
+
+        display-type: "DATE"
+        comma-separator: false
+        position {
+            column: 8
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 8 to 1 delimited by "*"
+    }
+
+    field "INTEREST.RATE" {
+        label {
+            en = "interestRate"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 9
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 9 to 1 delimited by "*"
+    }
+
+    field "INTEREST.PROPERTY" {
+        label {
+            en = "interestProperty"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 10
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 10 to 1 delimited by "*"
+    }
+
+    field "INT.PROPERTY.DESC" {
+        label {
+            en = "interestPropertyName"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 11
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 11 to 1 delimited by "*"
+    }
+
+    field "COMPOUND.TYPE" {
+        label {
+            en = "compoundType"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 12
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 12 to 1 delimited by "*"
+    }
+
+    field "RATE.TYPE" {
+        label {
+            en = "rateType"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 13
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 13 to 1 delimited by "*"
+    }
+
+    field "EFFECTIVE.RATE" {
+        label {
+            en = "effectiveRate"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 14
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 14 to 1 delimited by "*"
+    }
+
+    field "TIER.TYPE" {
+        label {
+            en = "tierType"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 15
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 15 to 1 delimited by "*"
+    }
+
+    field "VIRTUAL.BALANCE" {
+        label {
+            en = "virtualBalance"
+        }
+
+        comma-separator: false
+        position {
+            column: 16
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 16 to 1 delimited by "*"
+    }
+
+    field "BALANCE.TYPES" {
+        label {
+            en = "balanceTypes"
+        }
+
+        comments: "interests"
+        comma-separator: false
+        position {
+            column: 17
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 17 to 1 delimited by "*"
+    }
+
+    field "BALANCE.AMOUNT" {
+        label {
+            en = "balanceAmount"
+        }
+
+        comments: "interests"
+        display-type: "AMOUNT"
+        comma-separator: false
+        position {
+            column: 18
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 18 to 1 delimited by "*"
+    }
+
+    field "PAID.SCHD.COUNT" {
+        label {
+            en = "paidScheduleCount"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 19
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 19 to 1 delimited by "*"
+    }
+
+    field "DUE.SCHD.COUNT" {
+        label {
+            en = "dueScheduleCount"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 20
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 20 to 1 delimited by "*"
+    }
+
+    field "FUTR.SCHD.COUNT" {
+        label {
+            en = "futureScheduleCount"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 21
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 21 to 1 delimited by "*"
+    }
+
+    field "SCHD.PAYMENT.TYPE" {
+        label {
+            en = "schedulePaymentType"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 22
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 22 to 1 delimited by "*"
+    }
+
+    field "SCHD.PAYMENT.METHOD" {
+        label {
+            en = "schedulePaymentMethod"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 23
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 23 to 1 delimited by "*"
+    }
+
+    field "SCHD.PROPERTY" {
+        label {
+            en = "scheduleProperty"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 24
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 24 to 1 delimited by "*"
+    }
+
+    field "SCHD.PAYMENT.AMT" {
+        label {
+            en = "schedulePaymentAmount"
+        }
+
+        comments: "schedules"
+        display-type: "AMOUNT"
+        comma-separator: false
+        position {
+            column: 25
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 25 to 1 delimited by "*"
+    }
+
+    field "SCHD.PAYMENT.FREQ" {
+        label {
+            en = "schedulePaymentFrequency"
+        }
+
+        comments: "schedules"
+        comma-separator: false
+        position {
+            column: 26
+        }
+
+        processing-mode: Multi
+        operation: field-number 0
+        conversion: extract from 26 to 1 delimited by "*"
+    }
+
+    field "LAST.PAYMENT.DATE" {
+        label {
+            en = "lastPayment"
+        }
+
+        display-type: "DATE"
+        comma-separator: false
+        position {
+            column: 27
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 27 to 1 delimited by "*"
+    }
+
+    field "TERM" {
+        label {
+            en = "term"
+        }
+
+        comma-separator: false
+        position {
+            column: 28
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 28 to 1 delimited by "*"
+    }
+
+    field "PAYOFF.REQUEST" {
+        label {
+            en = "payoffRequest"
+        }
+
+        comma-separator: false
+        position {
+            column: 29
+        }
+
+        processing-mode: Single
+        operation: field-number 0
+        conversion: extract from 29 to 1 delimited by "*"
+    }
+
+}

@@ -1,0 +1,98 @@
+# UTF-8
+/* SODEOD GUI */
+Domain PP_SODEODGUI
+    @t24:i (module=PP)
+    @java:Package (value=com.temenos.t24.datamodel.pp.pp_sodeodgui)
+namespace "http://www.temenos.com/t24/PP_SODEODGUI"
+metamodelVersion 1.30.6
+Classes {
+    NOFILE_EOD_MONITORING
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.EOD.MONITORING, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        SODEOD_JOBSTATUS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=SODEOD.JOBSTATUS, genOperation=PP.NOFILE.EOD.MONITORING, mandatory=false)
+    }
+    NOFILE_ERRORLOG_SODEOD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.ERRORLOG.SODEOD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ERR_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=ERR.DETAILS, genOperation=PP.NOFILE.ERRORLOG.SODEOD, mandatory=true)
+    }
+    NOFILE_HISTLOG_SODEOD
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.HISTLOG.SODEOD, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        ERR_DETAILS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=ERR.DETAILS, genOperation=PP.NOFILE.HISTLOG.SODEOD, mandatory=true)
+    }
+    NOFILE_PP_SODEOD_SERVICE
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.PP.SODEOD.SERVICE, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        SODEOD_SERVICE : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=SODEOD.SERVICE, genOperation=PP.NOFILE.SODEOD.SERVICE.LIST, mandatory=true)
+        Service_Name : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=100, sysNumber=1.0, core=true, t24Name=Service.Name, mandatory=false)
+    }
+    NOFILE_SODEOD_DETAILED_REPORTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SODEOD.DETAILED.REPORTS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        ID : T24BusinessTypes:N
+            @i18n:Label (en="Transaction Ref")
+            @i18n:Tooltip (en="Transaction Reference")
+            @t24:i (align=R, inputBehaviour=N, maxLength=35, sysNumber=2.0, core=true, t24Name=ID, mandatory=false)
+        REPORT_LIST : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=REPORT.LIST, genOperation=PP.NOFILE.SODEOD.DETAILED.REPORTS, mandatory=false)
+    }
+    NOFILE_SODEOD_JOBLIST
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SODEOD.JOBLIST, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        Enabled : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=1, sysNumber=2.0, core=true, t24Name=Enabled, mandatory=false)
+        Frequency : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=1, sysNumber=3.0, core=true, t24Name=Frequency, mandatory=false)
+        SODEOD_JOBLIST : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=SODEOD.JOBLIST, genOperation=PP.NOFILE.SODEOD.JOBLIST, mandatory=false)
+        SkipIndicator : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=1, sysNumber=4.0, core=true, t24Name=SkipIndicator, mandatory=false)
+    }
+    NOFILE_SODEOD_JOBLIST_CLEAR
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SODEOD.JOBLIST.CLEAR, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        SODEOD_JOBCLEAR : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=SODEOD.JOBCLEAR, genOperation=PP.NOFILE.SODEOD.JOBLIST.CLEAR, mandatory=false)
+    }
+    NOFILE_SODEOD_REPORTS
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SODEOD.REPORTS, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        ReportDate : T24BusinessTypes:D
+            @t24:i (align=R, inputBehaviour=N, maxLength=11, sysNumber=2.0, core=true, t24Name=ReportDate, mandatory=false)
+        Y_BUILD_LIST : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=Y.BUILD.LIST, genOperation=PP.NOFILE.SODEOD.REPORTS, mandatory=false)
+    }
+    NOFILE_SOD_MONITORING
+        @i18n:Description (en="")
+        @t24:i (t24Name=NOFILE.SOD.MONITORING, level=I, type=T, allowedFunctions="L P S", localRefAllowed=false)
+    {
+        CompanyID : T24BusinessTypes:N
+            @t24:i (align=R, inputBehaviour=N, maxLength=3, sysNumber=1.0, core=true, t24Name=CompanyID, mandatory=true)
+        SODEOD_JOBSTATUS : T24BusinessTypes:N
+            @t24:i (align=L, inputBehaviour=N, maxLength=100, core=false, t24Name=SODEOD.JOBSTATUS, genOperation=PP.NOFILE.SOD.MONITORING, mandatory=false)
+    }
+}

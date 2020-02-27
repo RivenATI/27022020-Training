@@ -1,0 +1,143 @@
+Enquiry "TC.AA.SIMULATION.RUNNER" for "name:/AA_Framework:AA.SIMULATION.RUNNER#" {
+    metamodelVersion: "1.30.6"
+    start-line: 4
+    end-line: 20
+    custom-selection {
+
+        field "SIM.CAPTURE.REF" {
+        }
+
+        None
+    }
+
+    field "@ID" {
+        label {
+            en = "Id"
+        }
+
+        length: 40
+        alignment: Left
+        comma-separator: false
+        processing-mode: Single
+        operation: application-field-name "@ID"
+    }
+
+    field "SIM.REF" {
+        label {
+            en = "Sim Ref"
+        }
+
+        length: 30
+        alignment: Left
+        comma-separator: false
+        processing-mode: Multi
+        operation: application-field-name "SIM.CAPTURE.REF"
+    }
+
+    field "ARRANGEMENT.REF" {
+        label {
+            en = "Arrangement Reference"
+        }
+
+        length: 20
+        alignment: Left
+        comma-separator: false
+        processing-mode: Single
+        operation: application-field-name "ARRANGEMENT.REF"
+    }
+
+    field "SIM.CCY" {
+        label {
+            en = "Sim Ccy"
+        }
+
+        length: 35
+        alignment: Left
+        comma-separator: false
+        processing-mode: Single
+        operation: application-field-name "SIM.CURRENCY"
+    }
+
+    field "EFFECTIVE.DATE" {
+        label {
+            en = "Effective Date"
+        }
+
+        comma-separator: false
+        operation: field-extract "SIM.REF"
+        conversion: getFrom "AA.SIMULATION.CAPTURE" "EFFECTIVE.DATE" false
+    }
+
+    field "ACCT.CHARGE" {
+        label {
+            en = "Acct Charge"
+        }
+
+        comma-separator: false
+        operation: calc "\"%\"":"ARRANGEMENT.REF":"\"%\"":"@ID"
+    }
+
+    field "CHARGE" {
+        label {
+            en = "Charge"
+        }
+
+        comma-separator: false
+        operation: calc "ACCT.CHARGE":"\"%\"":"EFFECTIVE.DATE"
+    }
+
+    field "ACTIVITY.CHARGES" {
+        label {
+            en = "Activity Charges"
+        }
+
+        comma-separator: false
+        operation: field-extract "CHARGE"
+        conversion: call
+        jBC: "@ E.MB.AA.GET.ACTIVITY.CHARGES"
+    }
+
+    field "DELIMIT.MV" {
+        label {
+            en = "Delimit MV"
+        }
+
+        comma-separator: false
+        operation: field-extract "ACTIVITY.CHARGES"
+        conversion: call
+        jBC: "@ E.AA.CONV.DISPLAY.BENEFICIAL.CUSTOMERS"
+    }
+
+    field "PROPERTY" {
+        label {
+            en = "property"
+        }
+
+        comma-separator: false
+        position {
+            column: 1
+        }
+
+        processing-mode: Multi
+        operation: field-extract "DELIMIT.MV"
+        conversion: extract from 1 to 1 delimited by "*"
+        conversion: getFrom "AA.PROPERTY" "DESCRIPTION" false
+    }
+
+    field "PROPERTY.AMOUNT" {
+        label {
+            en = "Property Amount"
+        }
+
+        format: Currency "SIM.CCY" negative-pattern -#
+        comma-separator: false
+        position {
+            column: 2
+        }
+
+        processing-mode: Multi
+        operation: field-extract "DELIMIT.MV"
+        conversion: extract from 2 to 1 delimited by "*"
+    }
+
+}

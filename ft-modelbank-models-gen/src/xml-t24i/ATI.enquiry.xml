@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><enquiry:Enquiry xmlns:enquiry="http://www.odcgroup.com/t24/Enquiry" xmlns:translationDsl="http://www.odcgroup.com/translation/TranslationDsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" endLine="99" fileName="name:/AA_PaymentSchedule:AA.ACCOUNT.DETAILS#" metamodelVersion="1.30.6" name="ATI" startLine="4">
+  <header column="1" line="1">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text=""/>
+    </label>
+  </header>
+  <fields alignment="Right" length="11" name="Base Date" singleMulti="Single">
+    <label xsi:type="translationDsl:LocalTranslations">
+      <translations locale="en" text="Base Date"/>
+    </label>
+    <position column="2"/>
+    <operation field="BASE.DATE" xsi:type="enquiry:ApplicationFieldNameOperation"/>
+  </fields>
+</enquiry:Enquiry>
