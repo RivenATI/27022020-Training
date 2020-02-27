@@ -20,6 +20,7 @@ SUBROUTINE Test
 * Date            Modified by                Description
 * ini komen kedua
 * 20200227        lely
+* 20200227_2      MANGYUD
 *-----------------------------------------------------------------------------
     $INSERT I_COMMON
     $INSERT I_EQUATE
