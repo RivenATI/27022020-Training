@@ -8,7 +8,7 @@ PROGRAM Test.b
 * Modification History:-
 *-----------------------------------------------------------------------------
 * Date            Modified by                Description
-* EGA
+* komen DEV
 *-----------------------------------------------------------------------------
     $INSERT I_COMMON
     $INSERT I_EQUATE
