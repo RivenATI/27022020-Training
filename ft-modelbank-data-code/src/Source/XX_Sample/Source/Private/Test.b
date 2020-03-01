@@ -1,7 +1,7 @@
-* @ValidationCode : MjotMTU4NTkyNDYwOkNwMTI1MjoxNTgyNzgyMTUxNDg2OnVzZXI6LTE6LTE6MDowOmZhbHNlOk4vQTpSMTlfQU1SLjA6LTE6LTE=
-* @ValidationInfo : Timestamp         : 27 Feb 2020 12:42:31
+* @ValidationCode : MjotMTYxMDM3Nzc0MzpDcDEyNTI6MTU4Mjc4MzQ2NDAxMjpVc2VyOi0xOi0xOjA6MDpmYWxzZTpOL0E6UjE5X0FNUi4wOi0xOi0x
+* @ValidationInfo : Timestamp         : 27 Feb 2020 13:04:24
 * @ValidationInfo : Encoding          : Cp1252
-* @ValidationInfo : User Name         : user
+* @ValidationInfo : User Name         : User
 * @ValidationInfo : Nb tests success  : N/A
 * @ValidationInfo : Nb tests failure  : N/A
 * @ValidationInfo : Rating            : N/A
@@ -20,11 +20,17 @@ SUBROUTINE Test
 * Date            Modified by                Description
 * ini komen kedua
 * 20200227        lely
+* 20200227_2      MANGYUDs
+* woi
 *-----------------------------------------------------------------------------
     $INSERT I_COMMON
     $INSERT I_EQUATE
 * ternyata ada perubahan ADA AJADA
-* makanmakan
+* 20200227        lely
+*-----------------------------------------------------------------------------
+*   $INSERT I_COMMON
+*    $INSERT I_EQUATE
+
 *-----------------------------------------------------------------------------
 MAIN:
 *-----------------------------------------------------------------------------
